@@ -215,9 +215,19 @@ void startElevator() {
         println("Current floor: " + (currentFloor.getID() + 1));
         if(currentFloor.getID() < queue.get(1).getID()) {
             goUpOneFloor();
+            if (queue.contains(currentFloor)) {
+                openDoor();
+                currentFloor.deactivate();
+                queue.remove(currentFloor);
+            }
         }
         else if (currentFloor.getID() > queue.get(1).getID()) {
             goDownOneFloor();
+            if (queue.contains(currentFloor)) {
+                openDoor();
+                currentFloor.deactivate();
+                queue.remove(currentFloor);
+            }
         }
         else if (currentFloor.getID() == queue.get(1).getID()) {
             openDoor();

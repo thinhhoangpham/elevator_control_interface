@@ -50,7 +50,6 @@ public class Floor extends Button {
         rect(xPos,yPos, width, height);
         if (active == true) {
             fill(250);
-            cancelBtn.display();
         }
         else if (active == false) {
             fill(100);

@@ -3,8 +3,11 @@
 ## The Problem of Current Design
 
 One of the elevator control panels on campus:
+![alt text] (https://github.com/thinhhoangpham/p1.HoangThinh.Pham/blob/main/reportImages/IMG_802C72CFA484-1.jpeg?raw=true)
 
 In action:
+
+![alt text] (https://github.com/thinhhoangpham/p1.HoangThinh.Pham/blob/main/reportImages/ezgif-4-03908d94f1.gif?raw=true)
 
 Problem:
 -	Confusing button layout: Similar buttons stay too far apart (like floor buttons or door open and close buttons are at the opposite ends off the row
@@ -20,6 +23,8 @@ How can an elevator control panel can be better?
 -	Canceling a floor must be easily done while being hard to accidentally triggered.
 -	An interface should give more useful information (like places on each floor).
 -	Given information about places on each floor can minimize the problem of selecting a floor by mistake and lead to less confusion of solving the problem.
+
+![alt text] (https://github.com/thinhhoangpham/p1.HoangThinh.Pham/blob/main/reportImages/p1.HoangThinh.Pham.png?raw=true)
 
 
 Implementing touch user interface:

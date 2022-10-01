@@ -1,15 +1,15 @@
-public class CloseDoorButton extends Button {
+public class OpenDoorButton extends Button {
     PImage inactiveImg, activeImg;
     float xPos, yPos;
     int width, height;
     
-    public CloseDoorButton(int xPos, int yPos) {
+    public OpenDoorButton(int xPos, int yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
         width = 30;
         height = 30;
-        inactiveImg = loadImage("closeDoor_btn_inactive.png");
-        activeImg = loadImage("closeDoor_btn_active.png");
+        inactiveImg = loadImage("openDoor_btn_inactive.png");
+        activeImg = loadImage("openDoor_btn_active.png");
     }
     
     public void display() {

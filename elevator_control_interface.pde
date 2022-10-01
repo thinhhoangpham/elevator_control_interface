@@ -25,12 +25,14 @@ Floor currentFloor, nextFloor;
 Timer moveTimer, doorTimer;
 
 CloseDoorButton closeDoorBtn;
+OpenDoorButton openDoorBtn;
+
 
 
 void setup() {
     
     // Initializing
-    PFont.list();
+    frameRate(30);
     size(400, 900);
     pixelDensity(2);
     background(0);
@@ -49,7 +51,10 @@ void setup() {
     queue = new ArrayList<>();
     
     
-    closeDoorBtn = new CloseDoorButton(30, lcdPosY + lcdHeight + 20);
+    closeDoorBtn = new CloseDoorButton(lcdPosX + lcdWidth - 80, lcdPosY + lcdHeight - 15);
+    openDoorBtn = new OpenDoorButton(lcdPosX + lcdWidth - 40, lcdPosY + lcdHeight - 15);
+    
+    
     
 
     //Initializing floors
@@ -76,8 +81,9 @@ void setup() {
     queue.add(floors[0]);
     
     
-    moveTimer = new Timer(2000);
+    moveTimer = new Timer(4000);
     doorTimer = new Timer(4000);
+    
     
     
     
@@ -92,7 +98,7 @@ void draw() {
         floors[i].display();
     }
     
-    closeDoorBtn.display();
+    
     
     
 
@@ -112,14 +118,14 @@ void draw() {
     overLCD();
     
     //Elevator operating actions
-    //thread("startElevator");
     startElevator();
     
     
     
     
     
-    //println(queue.size());
+    closeDoorBtn.display();
+    openDoorBtn.display();
 }
 
 void mouseClicked() {
@@ -127,7 +133,7 @@ void mouseClicked() {
     // Check if user has selected a floor
     if(mouseButton==LEFT) {
         for (int i = 0; i < floors.length; i++) {
-            if (floors[i].isActive() == false && floors[i].isEnabled() == true) {
+            if (floors[i].isActive() == false && floors[i].isEnabled() == true && !queue.contains(floors[i])) {
               floors[i].pressed();
               if (floors[i].isActive()) {
                 queue.add(floors[i]);
@@ -140,11 +146,10 @@ void mouseClicked() {
         closeDoor();
     }
     
+    closeDoorBtn.pressed();
     
+    openDoorBtn.pressed();
     
-    
-    //println(queue.size());
-    //println(queue.get(0).getID());
     
     redraw();
 }
@@ -254,24 +259,42 @@ void goDownOneFloor() {
 }
 
 void closeDoor() {
-    doorTimer.start();
-    println("Door closing...");
-    while (doorTimer.complete() == false) {
+    //if (closeDoorBtn.isActive()) {
+        closeDoorBtn.pressed();
+        doorTimer.start();
+        println("Door closing...");
+        while (doorTimer.complete() == false) {
+              if (openDoorBtn.isActive()) {
+                  closeDoorBtn.pressed();
+                  return;
+              }
+        }
         
-    }
-    
-    println("Running...");
-    moving = true;
+        if (queue.size() > 1) {
+            println("Running...");
+            moving = true;
+        }
+        else {
+            println("Closed");
+            closeDoorBtn.deactivate();
+            
+        }
+
+    //}
 }
 
 void openDoor() {
-    doorTimer.start();
-    println("Door opening...");
-    while (doorTimer.complete() == false) {
+    //if (openDoorBtn.isActive()) {
+        doorTimer.start();
+        println("Door opening...");
+        while (doorTimer.complete() == false) {
+            
+        }
         
-    }
-    println("Openned...");
-    moving = false;
+        println("Arrived at floor " + (currentFloor.getID() + 1));
+        moving = false;
+
+    //}
     
     
 }

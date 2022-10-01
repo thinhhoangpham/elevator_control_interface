@@ -23,7 +23,7 @@ public class Button {
     }
     
     public void pressed() {
-        active = true;
+        active = !active;
     }
     
     public void deactivate() {

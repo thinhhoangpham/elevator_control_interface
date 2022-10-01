@@ -7,6 +7,7 @@ public class Floor extends Button {
     int width, height;
     PFont labelFont = createFont("HelveticaNeue-Light.otf", 64);
     PFont desFont = createFont("HelveticaNeue-Light.otf", 13);
+    //FloorCancelButton cancelBtn;
     
     
     public Floor(int floorID, float xPos, float yPos, int width) {
@@ -15,6 +16,7 @@ public class Floor extends Button {
         this.yPos = yPos;
         this.width = width;
         height = 120;
+        //cancelBtn = new FloorCancelButton((xPos + width) - 20, yPos/2);
     }
     
     public void setLabel(String label) {
@@ -48,6 +50,7 @@ public class Floor extends Button {
         rect(xPos,yPos, width, height);
         if (active == true) {
             fill(250);
+            cancelBtn.display();
         }
         else if (active == false) {
             fill(100);
@@ -58,6 +61,7 @@ public class Floor extends Button {
         rect(xPos + 90, yPos, 4, height);
         textFont(desFont);
         text(description, xPos + 110, yPos+ 20);
+        
     }
     
     public boolean mouseOver() {
@@ -71,7 +75,7 @@ public class Floor extends Button {
     
     public void pressed() {
         if (mouseOver() == true) {
-            active = !active;
+            active = true;
         }
     }
     

@@ -1,5 +1,6 @@
 public class CloseDoorButton extends Button {
     PImage inactiveImg, activeImg;
+    //PImage img;
     float xPos, yPos;
     int width, height;
     
@@ -10,6 +11,7 @@ public class CloseDoorButton extends Button {
         height = 30;
         inactiveImg = loadImage("closeDoor_btn_inactive.png");
         activeImg = loadImage("closeDoor_btn_active.png");
+        //img = loadImage("closeDoor_btn_inactive.png");
     }
     
     public void display() {
@@ -19,6 +21,15 @@ public class CloseDoorButton extends Button {
         else {
             image(inactiveImg, xPos, yPos, width, height);
         }
+        //image(img, xPos, yPos, width, height);
+    }
+    
+    public void displayActive() {
+        image(activeImg, xPos, yPos, width, height);
+    }
+    
+    public void displayInactive() {
+        image(inactiveImg, xPos, yPos, width, height);
     }
     
     public boolean mouseOver() {
@@ -30,9 +41,12 @@ public class CloseDoorButton extends Button {
         }
     }
     
-    public void pressed() {
+    public boolean pressed() {
         if (mouseOver() == true) {
             active = true;
+            //img = loadImage("closeDoor_btn_active.png");
+            return true;
         }
+        return false;
     }
 }

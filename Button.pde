@@ -22,8 +22,9 @@ public class Button {
         this.description = description;
     }
     
-    public void pressed() {
+    public boolean pressed() {
         active = !active;
+        return true;
     }
     
     public void deactivate() {
@@ -44,6 +45,10 @@ public class Button {
     
     public boolean isEnabled() {
         return isEnabled;
+    }
+    
+    public void enable() {
+        isEnabled = true;
     }
     
     public void disable() {

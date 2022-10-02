@@ -16,7 +16,7 @@ public class Floor extends Button {
         this.yPos = yPos;
         this.width = width;
         height = 120;
-        //cancelBtn = new FloorCancelButton((xPos + width) - 20, yPos/2);
+        //cancelBtn = new FloorCancelButton(xPos + width - 30, yPos - height/2);
     }
     
     public void setLabel(String label) {
@@ -50,9 +50,13 @@ public class Floor extends Button {
         rect(xPos,yPos, width, height);
         if (active == true) {
             fill(250);
+            //cancelBtn.display();
         }
         else if (active == false) {
             fill(100);
+            //if (cancelBtn.isActive()) {
+            //    active = false;
+            //}
         }
         
         textFont(labelFont);
@@ -72,10 +76,13 @@ public class Floor extends Button {
         }
     }
     
-    public void pressed() {
+    public boolean pressed() {
         if (mouseOver() == true) {
             active = true;
+            isEnabled = false;
+            return true;
         }
+        return false;
     }
     
 }

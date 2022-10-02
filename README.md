@@ -29,4 +29,6 @@ How can an elevator control panel can be better?
 
 Implementing touch user interface:
 
+![Alt text](https://github.com/thinhhoangpham/p1.HoangThinh.Pham/blob/main/reportImages/p1.HoangThinh.Pham.gif?raw=true)
+
 

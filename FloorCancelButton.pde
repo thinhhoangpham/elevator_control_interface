@@ -13,7 +13,7 @@ public class FloorCancelButton extends Button {
     
     public void display() {
         imageMode(CENTER);
-        image(icon, xPos, yPos, width, height); //<>//
+        image(icon, xPos, yPos, width, height); //<>// //<>//
         active = true;
     }
     

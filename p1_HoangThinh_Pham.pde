@@ -53,8 +53,8 @@ void setup() {
     queue = new ArrayList<>();
     
     
-    closeDoorBtn = new CloseDoorButton(lcdPosX + lcdWidth - 80, lcdPosY + lcdHeight + 25);
-    openDoorBtn = new OpenDoorButton(lcdPosX + lcdWidth - 40, lcdPosY + lcdHeight + 25);
+    closeDoorBtn = new CloseDoorButton();
+    openDoorBtn = new OpenDoorButton();
     
     
     
@@ -91,8 +91,8 @@ void setup() {
         cancelBtns[i] = new FloorCancelButton(floors[i].xPos + floors[i].width - 20, floors[i].yPos + floors[i].height / 2);
     }
     
-    currentFloor = floors[3];
-    nextFloor = currentFloor;
+    currentFloor = floors[0];
+    //nextFloor = currentFloor;
     //queue.add(currentFloor);
     
     
@@ -136,19 +136,21 @@ void draw() {
     rect(lcdPosX, lcdPosY, lcdWidth, 40);
     rect(lcdPosX, lcdHeight, lcdWidth, 40);
     
-    //Check if mouse cursor is in the LCD area
-    overLCD();
-    
-    
     closeDoorBtn.display();
     openDoorBtn.display();
     
-    //Elevator operating actions
-    //if (frameCount % 30 == 0) {
-    //    startElevator();
-    //}
     
-    startElevator();
+    //Check if mouse cursor is in the LCD area
+    thread("overLCD");
+    
+    
+    
+    
+    //Elevator operating actions
+    if (frameCount % 30 == 0) {
+        startElevator();
+    }
+    
     
     
     
@@ -158,10 +160,14 @@ void draw() {
 void mouseClicked() {
   
     // Check if user has selected a floor
-    selectFloor();
-    //thread("selectFloor");
-    deSelectFloor();
-    //thread("deSelectFloor");
+    //selectFloor();
+    if(overLCD) {
+        thread("selectFloor");
+    }
+    //deSelectFloor();
+    if(overLCD) {
+        thread("deSelectFloor");
+    }
     
     if (mouseButton==RIGHT) {
         thread("closeDoor");
@@ -195,21 +201,10 @@ void mousePressed() {
 void mouseDragged() {
   
   //Implementing mouse drag to simulate scrolling
-  if(locked) {
-    xOffset = mouseX - mouseXBefore;
-    yOffset = mouseY - mouseYBefore;
-    
-    if ((floors[0].yPos + yOffset/20 > lcdPosY + lcdHeight - floors[0].height - 36) && (floors[floors.length - 1].yPos + yOffset/20 < lcdPosY + 36)) {
-        for (int i = 0; i < floors.length; i++) {
-            float tempY = floors[i].yPos; 
-                floors[i].setYPos(tempY + yOffset/20);
-                cancelBtns[i].setYPos(floors[i].yPos + floors[i].height / 2);
-        }
-    }
-    
-  }
+  scrollList();
+  //thread("scrollList");
   
-  redraw();
+  //redraw();
 }
 
 void mouseReleased() {
@@ -234,7 +229,7 @@ void startElevator() {
         if(currentFloor.getID() < queue.get(0).getID()) {
             goUpOneFloor();
             if (queue.contains(currentFloor)) {
-                thread("openDoor");
+                openDoor();
                 currentFloor.deactivate();
                 queue.remove(currentFloor);
                 
@@ -243,14 +238,14 @@ void startElevator() {
         else if (currentFloor.getID() > queue.get(0).getID()) {
             goDownOneFloor();
             if (queue.contains(currentFloor)) {
-                thread("openDoor");
+                openDoor();
                 currentFloor.deactivate();
                 queue.remove(currentFloor);
                 
             }
         }
         else if (currentFloor.getID() == queue.get(0).getID()) {
-            thread("openDoor");
+            openDoor();
             currentFloor.deactivate();
             queue.remove(currentFloor);
             
@@ -300,7 +295,7 @@ void closeDoor() {
             
         }
         
-        redraw();
+        //redraw();
 
     //}
 }
@@ -327,10 +322,10 @@ void openDoor() {
             openDoorBtn.deactivate();
         }
         
-        for (Floor floor : queue) {
-            println("Floor in queue: " + (floor.getID() + 1));
-        }
-        redraw();
+        //for (Floor floor : queue) {
+        //    println("Floor in queue: " + (floor.getID() + 1));
+        //}
+        //redraw();
 
     //}
     
@@ -367,4 +362,20 @@ void deSelectFloor() {
         }
     }
     //println(queue.size());
+}
+
+void scrollList() {
+    if(locked) {
+        xOffset = mouseX - mouseXBefore;
+        yOffset = mouseY - mouseYBefore;
+        
+        if ((floors[0].yPos + yOffset/20 > lcdPosY + lcdHeight - floors[0].height - 36) && (floors[floors.length - 1].yPos + yOffset/20 < lcdPosY + 36)) {
+            for (int i = 0; i < floors.length; i++) {
+                float tempY = floors[i].yPos; 
+                    floors[i].setYPos(tempY + yOffset/20);
+                    cancelBtns[i].setYPos(floors[i].yPos + floors[i].height / 2);
+            }
+        }
+        
+    }
 }

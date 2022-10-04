@@ -47,6 +47,7 @@ public class Floor extends Button {
     public void display() {
         noStroke();
         noFill();
+        rectMode(CENTER);
         rect(xPos,yPos, width, height);
         if (active == true) {
             fill(250);

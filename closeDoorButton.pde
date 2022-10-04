@@ -7,16 +7,16 @@ public class CloseDoorButton extends Button {
     public CloseDoorButton(int xPos, int yPos) {
         this.xPos = xPos;
         this.yPos = yPos;
-        width = 30;
-        height = 30;
+        width = 33;
+        height = 33;
         inactiveImg = loadImage("closeDoor_btn_inactive.png");
         activeImg = loadImage("closeDoor_btn_active.png");
         img = loadImage("closeDoor_btn_inactive.png");
     }
     
     public CloseDoorButton() {
-        xPos = 160;
-        yPos = 710;
+        xPos = 90;
+        yPos = 700;
         width = 30;
         height = 30;
         inactiveImg = loadImage("closeDoor_btn_inactive.png");
@@ -31,6 +31,7 @@ public class CloseDoorButton extends Button {
         //else {
         //    image(inactiveImg, xPos, yPos, width, height);
         //}
+        imageMode(CENTER);
         image(img, xPos, yPos, width, height);
     }
     

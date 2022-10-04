@@ -15,8 +15,8 @@ public class OpenDoorButton extends Button {
     }
     
     public OpenDoorButton() {
-        xPos = 210;
-        yPos = 710;
+        xPos = 90;
+        yPos = 735;
         width = 30;
         height = 30;
         inactiveImg = loadImage("openDoor_btn_inactive.png");
@@ -31,6 +31,7 @@ public class OpenDoorButton extends Button {
         //else {
         //    image(inactiveImg, xPos, yPos, width, height);
         //}
+        imageMode(CENTER);
         image(img, xPos, yPos, width, height);
     }
     

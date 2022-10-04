@@ -5,14 +5,17 @@ public class LCD {
     int height;
     ControlP5 cp5;
     color c;
+    PImage image;
     
     
     
-    public LCD(ControlP5 cp5) {
-        width = 360;
-        height = 640;
+    public LCD() {
+        width = 400;
+        height = 900;
         this.cp5 = cp5;
         c = color(0, 0, 0);
+        imageMode(CENTER);
+        image = loadImage("frame.png");
         
         
     }
@@ -21,6 +24,7 @@ public class LCD {
         //noStroke();
         noStroke();
         fill(c);
-        rect(0, 0, width, height);
+        //rect(0, 0, width, height);
+        image(image, 200, 450);
     }
 }

@@ -5,6 +5,7 @@ ControlP5 cp5;
 //Declaring variables
 int width = 400;
 int height = 900;
+LCD frame;
 int lcdPosX, lcdPosY;
 int lcdWidth, lcdHeight;
 Floor[] floors;
@@ -37,7 +38,8 @@ void setup() {
     size(400, 900);
     pixelDensity(2);
     background(0);
-    cp5 = new ControlP5(this);
+    frame = new LCD();
+    //cp5 = new ControlP5(this);
     
     lcdPosX = 20;
     lcdPosY = 20;
@@ -55,6 +57,7 @@ void setup() {
     
     closeDoorBtn = new CloseDoorButton();
     openDoorBtn = new OpenDoorButton();
+    
     
     
     
@@ -125,6 +128,7 @@ void draw() {
     
 
     //Drawing the LCD panel
+    rectMode(CORNER);
     fill(14);
     noStroke();
     rect(0, 0, 20, height);
@@ -134,7 +138,10 @@ void draw() {
     fill(0);
     noStroke();
     rect(lcdPosX, lcdPosY, lcdWidth, 40);
-    rect(lcdPosX, lcdHeight, lcdWidth, 40);
+    rect(lcdPosX, lcdHeight - 20, lcdWidth, 40);
+    
+    
+    frame.display();
     
     closeDoorBtn.display();
     openDoorBtn.display();
@@ -151,6 +158,10 @@ void draw() {
         startElevator();
     }
     
+    
+    //frame.display();
+    closeDoorBtn.display();
+    openDoorBtn.display();
     
     
     
@@ -182,7 +193,7 @@ void mouseClicked() {
         thread("openDoor");
     }
     
-    
+    frame.display();
     redraw();
 }
 
@@ -295,7 +306,7 @@ void closeDoor() {
             
         }
         
-        //redraw();
+        redraw();
 
     //}
 }
@@ -325,7 +336,7 @@ void openDoor() {
         //for (Floor floor : queue) {
         //    println("Floor in queue: " + (floor.getID() + 1));
         //}
-        //redraw();
+        redraw();
 
     //}
     

@@ -48,7 +48,7 @@ void setup() {
     
     
     floorsX = lcdPosX;
-    floorsY = lcdPosY + lcdHeight - 20;
+    floorsY = lcdPosY + lcdHeight -20;
     
     floors = new Floor[9];
     cancelBtns = new FloorCancelButton[9];
@@ -194,7 +194,7 @@ void mouseClicked() {
     }
     
 
-    //redraw();
+    redraw();
 }
 
 void mousePressed() {
@@ -215,7 +215,7 @@ void mouseDragged() {
   scrollList();
   //thread("scrollList");
   
-  //redraw();
+  redraw();
 }
 
 void mouseReleased() {

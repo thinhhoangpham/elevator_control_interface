@@ -193,8 +193,8 @@ void mouseClicked() {
         thread("openDoor");
     }
     
-    frame.display();
-    redraw();
+
+    //redraw();
 }
 
 void mousePressed() {
